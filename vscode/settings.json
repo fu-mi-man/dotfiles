@@ -1,0 +1,59 @@
+{
+  "cSpell.ignoreWords": [
+    "ATTR_ERRMODE", // PHP PDO定数
+    "ERRMODE_EXCEPTION", // PHP PDO定数
+    "axios", // JSライブラリ
+    "nuxt" // JSフレームワーク
+  ],
+  "diffEditor.ignoreTrimWhitespace": true, // diffビューで行末スペースの差分を無視する
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit" // 手動保存時のみESLintの自動修正を実行（自動保存では走らない）
+  },
+  "editor.comments.ignoreEmptyLines": true, // コメントアウト時に空行をスキップする
+  "editor.formatOnPaste": true, // 貼り付け時に自動フォーマット
+  "editor.linkedEditing": true, // HTMLタグのリネームを連動させる（Auto Rename Tag の代替、ビルトイン）
+  "editor.formatOnSave": true, // 保存時に自動フォーマット
+  "editor.renderWhitespace": "boundary", // 単語間以外の空白文字を可視化する
+  "editor.tabSize": 2, // インデント幅（全ファイルタイプに適用、言語別設定で上書き可）
+  "editor.tokenColorCustomizations": {
+    "comments": "#758492", // コメントの文字色
+    "textMateRules": [
+      {
+        // コメントのイタリック体を無効化（多くのテーマがデフォルトでイタリックにする）
+        "scope": [
+          "comment",
+          "comment.block.documentation", // `/* */` のブロックコメント
+          "comment.line.double-slash", // `//` で始まる行コメント
+          "comment.line",
+          "comment.block"
+        ],
+        "settings": {
+          "fontStyle": "" // イタリック解除
+        }
+      }
+    ]
+  },
+  "editor.wordWrap": "on", // 長い行を折り返して表示する
+  "emmet.variables": {
+    "lang": "ja" // EmmetがHTMLを生成する際のlang属性をjaに設定
+  },
+  "files.autoSave": "afterDelay", // 一定時間後に自動保存
+  "files.insertFinalNewline": true, // ファイル末尾に改行を挿入
+  "files.trimFinalNewlines": true, // ファイル末尾の余分な改行を削除
+  "files.trimTrailingWhitespace": true, // 行末の空白を自動的に削除
+  "liveServer.settings.donotShowInfoMsg": true, // Live Serverの情報メッセージを表示しない
+  "security.workspace.trust.untrustedFiles": "open", // 信頼されていないワークスペースのファイルも開く
+  "sql-formatter.uppercase": true, // SQLのキーワードを大文字でフォーマット
+  "update.showReleaseNotes": false, // アップデート時のリリースノート表示を無効化
+  "workbench.colorTheme": "Dracula Theme", // カラーテーマ
+  "workbench.editor.wrapTabs": true, // タブが多い場合に折り返して表示する
+  "workbench.startupEditor": "none", // 起動時にウェルカムタブ等を開かない（前回のファイルは復元される）
+  // 言語別設定
+  "[json]": {
+    "editor.formatOnSave": true // JSONファイルの保存時に自動フォーマット（組み込みフォーマッターを使用）
+  },
+  // Markdownの場合は空白トリミングは実施しない
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  }
+}
