@@ -22,3 +22,13 @@ ln -sf ~/dev/dotfiles/vscode/settings.json ~/Library/Application\ Support/Cursor
 |---|---|
 | `claude/` | Claude Code (`~/.claude/`) |
 | `vscode/` | VSCode / Cursor |
+
+## Claude Code プラグイン
+
+`claude/settings.json` の `enabledPlugins` で管理。
+
+| プラグイン | 用途 |
+|---|---|
+| `context7` | Next.js・Tailwind・Drizzle等の最新ドキュメントを参照 |
+| `security-guidance` | XSS・SQLインジェクション等の脆弱性を自動検出 |
+| `typescript-lsp` | リアルタイム型チェック |
