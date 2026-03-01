@@ -1,17 +1,15 @@
-## 概要
-
-個人の設定ファイルを管理するための dotfiles リポジトリ。Claude Code の設定を管理する。
-
 ## dotfiles の管理方針
 
-設定ファイルはツールごとにディレクトリを分けて管理する（例：`claude/`、`git/`、`zsh/`）。
-ディレクトリ名はドットなし（`.claude/` ではなく `claude/`）にする。
+- ツールごとにディレクトリを分ける（例：`claude/`、`git/`、`zsh/`）
+- ディレクトリ名はドットなし（`.claude/` ではなく `claude/`）
+- シンボリックリンクはディレクトリ単位ではなく**ファイル単位**で貼る
 
-シンボリックリンクはディレクトリ単位ではなく**ファイル単位**で貼る：
-```
-~/.claude/settings.json -> ~/dev/dotfiles/claude/settings.json
-~/.claude/statusline.sh -> ~/dev/dotfiles/claude/statusline.sh
-```
+## AI への指示
+
+管理対象ファイルを追加・変更した場合は、必ず以下を更新すること：
+
+1. **CLAUDE.md** の「現在管理しているファイル」テーブル
+2. **README.md** のセットアップコマンドと構成テーブル
 
 ## 現在管理しているファイル
 
