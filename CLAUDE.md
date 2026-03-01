@@ -19,3 +19,5 @@
 |---|---|
 | `claude/settings.json` | `~/.claude/settings.json` |
 | `claude/statusline.sh` | `~/.claude/statusline.sh` |
+| `vscode/settings.json` | `~/Library/Application Support/Code/User/settings.json` |
+| `vscode/settings.json` | `~/Library/Application Support/Cursor/User/settings.json` |
