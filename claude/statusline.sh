@@ -1,63 +1,52 @@
 #!/bin/bash
+# ============================================================
+# Claude Code カスタムステータスライン
 #
-# Claude Code ステータスライン表示スクリプト
-#
-# 表示項目:
-#   コンテキスト使用率 / セッションコスト / API応答時間 /
-#   Gitブランチ / プロジェクトディレクトリ / モデル名 / バージョン
+# 表示:
+#   📈 Context: %  |  ⏳ API: Xm Xs  |  💰 $X.XXXX
+#   🌿 branch  |  📁 ~/project  |  🤖 Model  |  🏷️ vX.X.X
 #
 # 設定方法:
-#   1. ~/.claude/statusline.sh に配置
+#   1. cp statusline.sh ~/.claude/statusline.sh
 #   2. chmod +x ~/.claude/statusline.sh
 #   3. ~/.claude/settings.json に以下を追加:
-#      { "statusLine": { "type": "command", "command": "~/.claude/statusline.sh" } }
+#      {
+#        "statusLine": {
+#          "type": "command",
+#          "command": "~/.claude/statusline.sh"
+#        }
+#      }
 #
-# 参考: https://code.claude.com/docs/en/statusline
-
+# テスト:
+#   echo '{"model":{"display_name":"Opus"},"workspace":{"project_dir":"/home/user/my-project"},"version":"1.0.80","cost":{"total_cost_usd":0.0123,"total_api_duration_ms":138200},"context_window":{"used_percentage":42.5}}' | ./statusline.sh
+#
+# 参考: https://code.claude.com/docs/ja/statusline
+# ============================================================
 set -euo pipefail
 
-# --- JSON入力の読み込み ---
-# Claude CodeがstdinにセッションデータをJSON形式で渡す
+# --- stdin から JSON を読み込む ---
 input=$(cat)
 
-# jqでフィールドを取得するヘルパー関数
+# --- jq でフィールドを取得するヘルパー関数 ---
 j() { echo "$input" | jq -r "$1"; }
 
-# デバッグ: 実際のJSONを確認したい場合は下の行のコメントを外す
-# echo "$input" > /tmp/statusline_debug.json
-
 # --- 各フィールドの取得 ---
-
-# コンテキストウィンドウ使用率 (公式ドキュメント外・実データに存在)
-# 小数点以下を切り捨てて整数にする
 pct=$(j '.context_window.used_percentage // 0' | cut -d. -f1)
-
-# セッションコスト (公式: cost.total_cost_usd)
-# LC_NUMERIC=C でロケールに依存しない小数点表記を保証
+api_ms=$(j '.cost.total_api_duration_ms // 0')
 cost=$(j '.cost.total_cost_usd // 0')
-cost=$(LC_NUMERIC=C printf '%.4f' "$cost")
-
-# API応答時間の合計 (公式: cost.total_api_duration_ms) をミリ秒→秒に変換
-api_sec=$(j '.cost.total_api_duration_ms // 0' | awk '{printf "%.1f", $1/1000}')
-
-# Gitブランチ (公式 Git-Aware Status Line 準拠)
-# カレントディレクトリがgitリポジトリ内であればブランチ名を取得
-git_branch=""
-if git rev-parse --git-dir > /dev/null 2>&1; then
-    branch=$(git branch --show-current 2>/dev/null)
-    [[ -n "$branch" ]] && git_branch="$branch"
-fi
-
-# プロジェクトディレクトリ (公式: workspace.project_dir)
-# $HOME を ~ に短縮して表示
+git_branch=$(git branch --show-current 2>/dev/null || true)
 project_dir=$(j '.workspace.project_dir // ""')
-project_dir_short="${project_dir/#"$HOME"/~}"
-
-# モデル表示名 (公式: model.display_name)
 model=$(j '.model.display_name // "?"')
-
-# Claude Codeバージョン (公式: version)
 version=$(j '.version // ""')
+
+# --- 値のフォーマット ---
+# LC_NUMERIC=C でロケールに依存しない小数点表記を保証
+cost_fmt=$(LC_NUMERIC=C printf '%.4f' "$cost")
+# ミリ秒 → 分秒に変換（awk 不要・bash 算術のみ）
+api_min=$((api_ms / 60000))
+api_sec=$(( (api_ms % 60000) / 1000 ))
+# $HOME を ~ に短縮
+project_dir_short="${project_dir/#"$HOME"/~}"
 
 # --- コンテキスト使用率に応じた色分け ---
 # 緑: 50%未満 / 黄: 50-74% / 赤: 75%以上
@@ -70,5 +59,5 @@ else
 fi
 reset='\033[0m'
 
-# --- ステータスライン出力 (1行のみ) ---
-echo -e "${color}📊 context: ${pct}%${reset} | 💰 cost: \$${cost} | ⚡ api: ${api_sec}s | 🌿 branch: ${git_branch} | 📁 dir: ${project_dir_short} | 🤖 model: ${model} | 📟 v${version} "
+# --- ステータスライン出力 ---
+echo -e "${color}📈 Context: ${pct}%${reset} | ⏳ API: ${api_min}m ${api_sec}s | 💰 \$${cost_fmt} | 🌿 ${git_branch} | 📁 ${project_dir_short} | 🤖 ${model} | 🏷️ v${version} "
