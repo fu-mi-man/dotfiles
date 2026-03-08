@@ -1,0 +1,10 @@
+# CLI Tools
+brew "gh"        # GitHub CLI
+brew "git"       # バージョン管理
+brew "jq"        # JSONの整形・クエリ
+brew "lefthook"  # Git hooks管理
+brew "mise"      # ランタイムバージョン管理 (Node, Python など)
+brew "tree"      # ディレクトリをツリー表示
+
+# Apps
+cask "claude-code" # Claude CLI

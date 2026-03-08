@@ -17,5 +17,6 @@
 |---|---|
 | `claude/settings.json` | `~/.claude/settings.json` |
 | `claude/statusline.sh` | `~/.claude/statusline.sh` |
+| `homebrew/Brewfile` | `brew bundle` で使用（リンク不要） |
 | `vscode/settings.json` | `~/Library/Application Support/Code/User/settings.json` |
 | `vscode/settings.json` | `~/Library/Application Support/Cursor/User/settings.json` |

@@ -4,7 +4,13 @@
 
 ## セットアップ
 
-ファイル単位でシンボリックリンクを貼る：
+**1. Homebrew パッケージを一括インストール**
+
+```sh
+brew bundle --file=~/dev/dotfiles/homebrew/Brewfile
+```
+
+**2. ファイル単位でシンボリックリンクを貼る**
 
 ```sh
 # Claude Code
@@ -21,6 +27,7 @@ ln -sf ~/dev/dotfiles/vscode/settings.json ~/Library/Application\ Support/Cursor
 | ディレクトリ | 対象ツール |
 |---|---|
 | `claude/` | Claude Code (`~/.claude/`) |
+| `homebrew/` | Homebrew (Brewfile) |
 | `vscode/` | VSCode / Cursor |
 
 ## Claude Code プラグイン
