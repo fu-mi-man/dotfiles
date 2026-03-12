@@ -1,0 +1,3 @@
+---
+"editor_view:insert_autosuggestion": tab                   # Tab でサジェストを補完
+"input:open_completion_suggestions": ctrl-space            # Ctrl+Space で補完候補を表示

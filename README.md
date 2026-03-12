@@ -20,6 +20,10 @@ ln -sf ~/dev/dotfiles/claude/statusline.sh ~/.claude/statusline.sh
 # VSCode / Cursor（共通設定）
 ln -sf ~/dev/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 ln -sf ~/dev/dotfiles/vscode/settings.json ~/Library/Application\ Support/Cursor/User/settings.json
+
+# Warp
+mkdir -p ~/.warp
+ln -sf ~/dev/dotfiles/warp/keybindings.yaml ~/.warp/keybindings.yaml
 ```
 
 ## 構成
@@ -29,6 +33,7 @@ ln -sf ~/dev/dotfiles/vscode/settings.json ~/Library/Application\ Support/Cursor
 | `claude/` | Claude Code (`~/.claude/`) |
 | `homebrew/` | Homebrew (Brewfile) |
 | `vscode/` | VSCode / Cursor |
+| `warp/` | Warp |
 
 ## Claude Code プラグイン
 
