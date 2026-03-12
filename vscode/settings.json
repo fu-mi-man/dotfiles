@@ -12,7 +12,7 @@
   "editor.comments.ignoreEmptyLines": true, // コメントアウト時に空行をスキップする
   "editor.formatOnPaste": true, // 貼り付け時に自動フォーマット
   "editor.linkedEditing": true, // HTMLタグのリネームを連動させる（Auto Rename Tag の代替、ビルトイン）
-  "editor.formatOnSave": true, // 保存時に自動フォーマット
+  "editor.formatOnSave": false, // 保存時の自動フォーマットを無効化（lefthook で管理）
   "editor.renderWhitespace": "boundary", // 単語間以外の空白文字を可視化する
   "editor.tabSize": 2, // インデント幅（全ファイルタイプに適用、言語別設定で上書き可）
   "editor.tokenColorCustomizations": {
