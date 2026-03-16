@@ -10,7 +10,19 @@
 brew bundle --file=~/dev/dotfiles/homebrew/Brewfile
 ```
 
-**2. ファイル単位でシンボリックリンクを貼る**
+**2. mise で Node をセットアップ**
+
+```sh
+# シェルに mise を有効化（~/.zshrc に追記）
+echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+source ~/.zshrc
+
+# Node をインストールしてグローバルに設定
+mise install node@24
+mise use -g node@24
+```
+
+**3. ファイル単位でシンボリックリンクを貼る**
 
 ```sh
 # Claude Code
@@ -44,3 +56,12 @@ ln -sf ~/dev/dotfiles/warp/keybindings.yaml ~/.warp/keybindings.yaml
 | `context7` | Next.js・Tailwind・Drizzle等の最新ドキュメントを参照 |
 | `security-guidance` | XSS・SQLインジェクション等の脆弱性を自動検出 |
 | `typescript-lsp` | リアルタイム型チェック |
+| `code-review` | コードレビュー支援 |
+
+## Claude Code MCP サーバー
+
+`~/.claude.json` の `mcpServers` で管理（`claude mcp add` コマンドで設定）。
+
+| MCP | 用途 |
+|---|---|
+| `pencil` | Pencil（UIデザインツール）との連携 |

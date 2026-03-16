@@ -21,3 +21,4 @@
 | `vscode/settings.json` | `~/Library/Application Support/Code/User/settings.json` |
 | `vscode/settings.json` | `~/Library/Application Support/Cursor/User/settings.json` |
 | `warp/keybindings.yaml` | `~/.warp/keybindings.yaml` |
+| `mise/config.toml` | `~/.config/mise/config.toml` |
