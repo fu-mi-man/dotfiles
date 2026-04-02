@@ -22,7 +22,16 @@ mise install node@24
 mise use -g node@24
 ```
 
-**3. ファイル単位でシンボリックリンクを貼る**
+**3. MCP サーバーを追加**
+
+```sh
+# マネーフォワード クラウド会計
+claude mcp add --transport http --scope user mfc_ca \
+  https://beta.mcp.developers.biz.moneyforward.com/mcp/ca/v3
+# → Claude Code 内で /mcp を開き、mfc_ca を選択して OAuth 認証
+```
+
+**4. ファイル単位でシンボリックリンクを貼る**
 
 ```sh
 # Claude Code
@@ -65,3 +74,4 @@ ln -sf ~/dev/dotfiles/warp/keybindings.yaml ~/.warp/keybindings.yaml
 | MCP | 用途 |
 |---|---|
 | `pencil` | Pencil（UIデザインツール）との連携 |
+| `mfc_ca` | マネーフォワード クラウド会計（仕訳・試算表・残高等の取得・登録） |
