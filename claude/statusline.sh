@@ -2,8 +2,9 @@
 # ============================================================
 # Claude Code カスタムステータスライン (v3)
 #
-# 表示 (1行):
-#   📈 Context: XX% | ⏳ API: Xm Xs | 💰 $X.XX | 🌿 branch | 📁 ~/project | 🤖 Model | 🏷️ vX.X.X
+# 表示 (2行):
+#   📈 Context: XX% | ⏳ API: Xm Xs | 💰 $X.XX
+#   🌿 branch | 📁 ~/project | 🤖 Model | 🏷️ vX.X.X
 #
 # 設定方法:
 #   1. cp statusline.sh ~/.claude/statusline.sh
@@ -56,12 +57,14 @@ else                        color=$GREEN
 fi
 
 # --- 組み立て ---
-out="${color}📈 Context: ${pct}%${RESET}"
-out="${out} | ⏳ API: ${api_min}m ${api_sec}s"
-out="${out} | 💰 \$${cost_fmt}"
-[ -n "$git_branch" ] && out="${out} | 🌿 ${git_branch}"
-out="${out} | 📁 ${project_dir/#"$HOME"/~}"
-out="${out} | 🤖 ${model}"
-[ -n "$version" ] && out="${out} | 🏷️ v${version}"
+line1="${color}📈 Context: ${pct}%${RESET}"
+line1="${line1} | ⏳ API: ${api_min}m ${api_sec}s"
+line1="${line1} | 💰 \$${cost_fmt}"
 
-printf '%b\n' "$out"
+line2=""
+[ -n "$git_branch" ] && line2="🌿 ${git_branch} | "
+line2="${line2}📁 ${project_dir/#"$HOME"/~}"
+line2="${line2} | 🤖 ${model}"
+[ -n "$version" ] && line2="${line2} | 🏷️ v${version}"
+
+printf '%b\n%b\n' "$line1" "$line2"
